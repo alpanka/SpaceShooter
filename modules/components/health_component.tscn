@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgx5fsmnrhrmt"]
+
+[ext_resource type="Script" path="res://modules/components/health_component.gd" id="1_dx67r"]
+
+[node name="HealthComponent" type="Area2D"]
+script = ExtResource("1_dx67r")
+
+[node name="HurtboxArea" type="CollisionShape2D" parent="."]
+debug_color = Color(0, 1, 0, 0.05)

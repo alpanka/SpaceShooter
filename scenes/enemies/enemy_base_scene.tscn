@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbwbnj5eoagvd"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_base_scene.gd" id="1_4hgk7"]
+[ext_resource type="Texture2D" uid="uid://d1pauytmy1kcg" path="res://assets/ship_orange.png" id="1_23q1s"]
+[ext_resource type="Resource" uid="uid://s1ccu12ljnin" path="res://resources/enemies/enemy_basic.tres" id="2_btx6d"]
+[ext_resource type="PackedScene" uid="uid://bgx5fsmnrhrmt" path="res://modules/components/health_component.tscn" id="3_dibjr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqc3a"]
+size = Vector2(28, 32)
+
+[node name="EnemyBaseScene" type="CharacterBody2D"]
+script = ExtResource("1_4hgk7")
+stats = ExtResource("2_btx6d")
+
+[node name="Modules" type="Node2D" parent="."]
+
+[node name="IdleTimer" type="Timer" parent="Modules"]
+
+[node name="AttackTimer" type="Timer" parent="Modules"]
+
+[node name="HealthComponent" parent="Modules" instance=ExtResource("3_dibjr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hqc3a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_23q1s")

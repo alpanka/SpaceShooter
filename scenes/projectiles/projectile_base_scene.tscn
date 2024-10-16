@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch7wxlolaycf7"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/projectile_base_scene.gd" id="1_0p115"]
+[ext_resource type="Resource" uid="uid://1unexrjr3d5o" path="res://resources/projectiles/projectile_basic.tres" id="2_c062v"]
+[ext_resource type="PackedScene" uid="uid://dudcrip8j1ok8" path="res://modules/components/hitbox_component.tscn" id="3_dmc3y"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wiqm"]
+radius = 2.0
+height = 17.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2x8qr"]
+size = Vector2(3, 16)
+
+[node name="ProjectileBaseScene" type="CharacterBody2D"]
+script = ExtResource("1_0p115")
+projectile_stats = ExtResource("2_c062v")
+
+[node name="OnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1, -1)
+rect = Rect2(0, 0, 2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_8wiqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = SubResource("PlaceholderTexture2D_2x8qr")
+
+[node name="Modules" type="Node2D" parent="."]
+
+[node name="HitboxComponent" parent="Modules" instance=ExtResource("3_dmc3y")]

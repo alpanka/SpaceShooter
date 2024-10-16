@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyBaseResource" load_steps=2 format=3 uid="uid://s1ccu12ljnin"]
+
+[ext_resource type="Script" path="res://resources/enemies/enemy_base_resource.gd" id="1_ndtpt"]
+
+[resource]
+script = ExtResource("1_ndtpt")
+idle_time_duration = 3.0
+attack_time_duration = 3.0
+speed_init = 200.0
+speed_max = 300.0
+health_init = 50
+damage_amount = 0

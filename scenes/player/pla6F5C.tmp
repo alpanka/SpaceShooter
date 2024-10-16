@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b82ayfrdh46yp"]
+
+[ext_resource type="Texture2D" uid="uid://d1pauytmy1kcg" path="res://assets/ship_orange.png" id="1_apcl5"]
+[ext_resource type="Script" path="res://scenes/player/player_ship.gd" id="1_u3g5p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afrhg"]
+size = Vector2(32, 32)
+
+[node name="PlayerShip" type="CharacterBody2D"]
+script = ExtResource("1_u3g5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_afrhg")
+
+[node name="Nozzle" type="Node2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="NozzleLeft" type="Marker2D" parent="Nozzle"]
+position = Vector2(-10, -15)
+
+[node name="NozzleCenter" type="Marker2D" parent="Nozzle"]
+position = Vector2(0, -31)
+
+[node name="NozzleRight" type="Marker2D" parent="Nozzle"]
+position = Vector2(10, -15)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_apcl5")
