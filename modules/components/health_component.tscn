@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://modules/components/health_component.gd" id="1_dx67r"]
 
 [node name="HealthComponent" type="Area2D"]
+collision_layer = 1024
+collision_mask = 512
 script = ExtResource("1_dx67r")
 
 [node name="HurtboxArea" type="CollisionShape2D" parent="."]

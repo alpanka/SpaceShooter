@@ -57,6 +57,15 @@ RMB={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Enviroment"
+2d_physics/layer_5="Projectile"
+2d_physics/layer_10="Hitbox"
+2d_physics/layer_11="Hurtbox"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

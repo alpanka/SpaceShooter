@@ -19,6 +19,9 @@ func _ready() -> void:
 
 ## Initial setup
 func _initialize_hitbox_component() -> void:
+	## Connect to area entered
+	self.area_entered.connect(_on_hitbox_area_entered)
+	
 	## Get owner node -> damaging node2d
 	await get_owner().ready
 	actor = get_owner()
@@ -56,4 +59,12 @@ func _initialize_collision_area() -> void:
 	## Set shape and its position
 	hitbox_area.shape = actor_collision_area.shape
 	hitbox_area.global_position = actor_collision_area.global_position
+
+
+## Apply damage on collision
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area is not HealthComponent:
+		return
 	
+	area = area as HealthComponent
+	area.take_damage(damage_amount)

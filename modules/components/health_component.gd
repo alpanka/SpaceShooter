@@ -1,5 +1,5 @@
 class_name HealthComponent
-extends Node
+extends Area2D
 
 signal damage_received(health: int, damage: int)
 
@@ -57,4 +57,4 @@ func _initialize_collision_area() -> void:
 func take_damage(damage_amount: int) -> void:
 	health_current = min(health_current - damage_amount, 0)
 	damage_received.emit(health_current, damage_amount)
-	
+	print(self, " ", damage_amount)

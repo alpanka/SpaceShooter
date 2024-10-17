@@ -12,6 +12,8 @@ height = 17.0
 size = Vector2(3, 16)
 
 [node name="ProjectileBaseScene" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_0p115")
 projectile_stats = ExtResource("2_c062v")
 

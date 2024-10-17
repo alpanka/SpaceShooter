@@ -16,8 +16,8 @@ texture = ExtResource("1_83lgn")
 metadata/_edit_lock_ = true
 
 [node name="PlayerShip" parent="." instance=ExtResource("3_1bexq")]
-position = Vector2(297, 993)
+position = Vector2(300, 1000)
 
 [node name="EnemyBaseScene" parent="." instance=ExtResource("4_e1e2o")]
-position = Vector2(280, 189)
+position = Vector2(300, 200)
 rotation = 3.14159
