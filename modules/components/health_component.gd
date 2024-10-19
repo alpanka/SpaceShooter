@@ -3,7 +3,7 @@ extends Area2D
 
 signal damage_received(health: int, damage: int)
 
-@export var auto_define_collision: bool = true
+@export var auto_define_collision: bool = false
 @onready var hurtbox_area: CollisionShape2D = $HurtboxArea
 
 var actor: CharacterBody2D
@@ -13,6 +13,16 @@ var health_current: int		# current health
 
 func _ready() -> void:
 	_initialize_component()
+
+
+## Apply damage on health.
+func take_damage(damage_amount: int) -> void:
+	health_current = max(health_current - damage_amount, 0)
+	damage_received.emit(health_current, damage_amount)
+	
+	## Die when health 0
+	if health_current == 0:
+		_actor_death()
 
 
 ## Initial setup
@@ -54,7 +64,7 @@ func _initialize_collision_area() -> void:
 	hurtbox_area.global_position = actor_collision_area.global_position
 
 
-func take_damage(damage_amount: int) -> void:
-	health_current = min(health_current - damage_amount, 0)
-	damage_received.emit(health_current, damage_amount)
-	print(self, " ", damage_amount)
+## Handle actor death
+func _actor_death() -> void:
+	print(actor, " Died!")
+	actor.queue_free()

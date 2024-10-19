@@ -1,7 +1,7 @@
 class_name HitboxComponent
 extends Area2D
 
-@export var auto_define_collision: bool = true
+@export var auto_define_collision: bool = false
 
 @onready var hitbox_area: CollisionShape2D = $HitboxArea
 
@@ -68,3 +68,10 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	
 	area = area as HealthComponent
 	area.take_damage(damage_amount)
+	
+	## Remove hitbox object
+	_remove_damaging_object()
+
+
+func _remove_damaging_object() -> void:
+	actor.queue_free()
