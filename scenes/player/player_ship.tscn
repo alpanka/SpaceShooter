@@ -12,6 +12,16 @@ size = Vector2(32, 32)
 collision_mask = 528
 script = ExtResource("1_u3g5p")
 
+[node name="Modules" type="Node2D" parent="."]
+
+[node name="PlayerInputController" type="Node" parent="Modules" node_paths=PackedStringArray("movement_controller", "actor")]
+script = ExtResource("3_f0ojm")
+movement_controller = NodePath("../PlayerMovementComponent")
+actor = NodePath("../..")
+
+[node name="PlayerMovementComponent" type="Node" parent="Modules"]
+script = ExtResource("3_eho44")
+
 [node name="Nozzle" type="Node2D" parent="."]
 position = Vector2(0, -1)
 
@@ -31,13 +41,3 @@ shape = SubResource("RectangleShape2D_afrhg")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("1_apcl5")
-
-[node name="Modules" type="Node2D" parent="."]
-
-[node name="PlayerInputController" type="Node" parent="Modules" node_paths=PackedStringArray("movement_controller", "actor")]
-script = ExtResource("3_f0ojm")
-movement_controller = NodePath("../PlayerMovementComponent")
-actor = NodePath("../..")
-
-[node name="PlayerMovementComponent" type="Node" parent="Modules"]
-script = ExtResource("3_eho44")
