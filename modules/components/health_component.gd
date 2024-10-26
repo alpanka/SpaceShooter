@@ -1,14 +1,22 @@
 class_name HealthComponent
 extends Area2D
 
-signal damage_received(health: int, damage: int)
+signal health_changed(health_new: int)
 
 @export var auto_define_collision: bool = false
 @onready var hurtbox_area: CollisionShape2D = $HurtboxArea
 
 var actor: CharacterBody2D
 var health_init: int 		# initial health
-var health_current: int		# current health
+var health_current: int:
+	set(value):
+		if health_current == value:
+			return
+		
+		health_current = value
+		health_changed.emit(health_current)
+	get:
+		return health_current
 
 
 func _ready() -> void:
@@ -18,7 +26,6 @@ func _ready() -> void:
 ## Apply damage on health.
 func take_damage(damage_amount: int) -> void:
 	health_current = max(health_current - damage_amount, 0)
-	damage_received.emit(health_current, damage_amount)
 	
 	## Die when health 0
 	if health_current == 0:

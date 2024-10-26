@@ -3,7 +3,7 @@
 
 # Moving actors/objects
 	[X] Prevent moving out of screen
-	[ ] Apply smoothed velocity
+	[X] Apply smoothed velocity
 	[ ] Animation on movement, damage and death
 
 # Enviroment

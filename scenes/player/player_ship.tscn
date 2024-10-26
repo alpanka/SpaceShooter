@@ -1,16 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://b82ayfrdh46yp"]
+[gd_scene load_steps=8 format=3 uid="uid://b82ayfrdh46yp"]
 
 [ext_resource type="Texture2D" uid="uid://d1pauytmy1kcg" path="res://assets/ship_orange.png" id="1_apcl5"]
 [ext_resource type="Script" path="res://scenes/player/player_ship.gd" id="1_u3g5p"]
 [ext_resource type="Script" path="res://modules/components_player/player_movement_component.gd" id="3_eho44"]
 [ext_resource type="Script" path="res://modules/components_player/player_input_controller.gd" id="3_f0ojm"]
+[ext_resource type="PackedScene" uid="uid://bgx5fsmnrhrmt" path="res://modules/components/health_component.tscn" id="4_k7swm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8216d"]
+radius = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afrhg"]
 size = Vector2(32, 32)
 
-[node name="PlayerShip" type="CharacterBody2D"]
+[node name="PlayerShip" type="CharacterBody2D" node_paths=PackedStringArray("health_component") groups=["player"]]
 collision_mask = 528
 script = ExtResource("1_u3g5p")
+health_component = NodePath("Modules/HealthComponent")
 
 [node name="Modules" type="Node2D" parent="."]
 
@@ -21,6 +26,12 @@ actor = NodePath("../..")
 
 [node name="PlayerMovementComponent" type="Node" parent="Modules"]
 script = ExtResource("3_eho44")
+
+[node name="HealthComponent" parent="Modules" instance=ExtResource("4_k7swm")]
+
+[node name="HurtboxArea" parent="Modules/HealthComponent" index="0"]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_8216d")
 
 [node name="Nozzle" type="Node2D" parent="."]
 position = Vector2(0, -1)
@@ -41,3 +52,5 @@ shape = SubResource("RectangleShape2D_afrhg")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("1_apcl5")
+
+[editable path="Modules/HealthComponent"]
