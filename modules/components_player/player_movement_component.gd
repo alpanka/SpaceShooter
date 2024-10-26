@@ -7,11 +7,12 @@ var actor: Player
 var speed_init: float = 400.0
 var speed_max: float = 800.0
 var speed_current: float = speed_init
-var acceleration: float = 20.0
+var acceleration: float = 500.0
+var smoothing: float
 
-var limit_x_right: int
-var limit_x_left: int
-var in_screen: bool # BUG Not sure if we need this
+var limit_x_right: int		# Screen limit on right side
+var limit_x_left: int		# Screen limit on left side
+var in_screen: bool 		# BUG Not sure if we need this
 var can_move: bool
 
 var direction: Vector2
@@ -22,7 +23,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	_player_movement()
+	_player_movement(delta)
 
 
 func _initialize_controller() -> void:
@@ -34,6 +35,7 @@ func _initialize_controller() -> void:
 	
 	# Get the size of active viewport.
 	# As aspect is "keep", this means that it'll be a fixed width.
+	# If aspect was not "keep", this would have been changing as window is resized.
 	limit_x_right = int(get_viewport().get_visible_rect().size.x)
 	limit_x_left = 10
 	
@@ -41,9 +43,10 @@ func _initialize_controller() -> void:
 	can_move = true
 
 
-func _player_movement() -> void:
+func _player_movement(delta) -> void:
 	if can_move:
-		actor.velocity = speed_current * direction
+		smoothing = 1 - exp(-1 * acceleration * delta)
+		actor.velocity = actor.velocity.lerp(speed_current * direction, smoothing)
 		actor.move_and_slide()
 	if _check_player_pos_limit() != Vector2.ZERO:
 		can_move = false
@@ -52,6 +55,7 @@ func _player_movement() -> void:
 
 
 ## Check if player is trying to leave the screen
+## Return a vector in the opposite direction
 func _check_player_pos_limit() -> Vector2:
 	## Player pushed through left
 	if actor.global_position.x <= limit_x_left:
@@ -77,6 +81,7 @@ func _bounce_back_to_limit():
 	tween.tween_property(actor, "global_position", target_pos, 0.2).\
 	set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	await tween.finished
+	# TODO consider adjusting the easing?
 	
 	in_screen = true
 	await get_tree().create_timer(0.5).timeout

@@ -2,7 +2,7 @@
 	[ ] Adaptation of player's current projectile
 
 # Moving actors/objects
-	[ ] Prevent moving out of screen
+	[X] Prevent moving out of screen
 	[ ] Apply smoothed velocity
 	[ ] Animation on movement, damage and death
 
